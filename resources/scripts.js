@@ -93,6 +93,22 @@ function drawShapes() {
     ctx.lineTo(polygonVertices[3]['x'], polygonVertices[3]['y']);
     ctx.lineTo(polygonVertices[0]['x'], polygonVertices[0]['y']);
     ctx.stroke();
+/*
+    var sideAB = Math.sqrt(polygonVertices[0]['x'] - polygonVertices[1]['x']);
+    var sideBC = Math.sqrt(polygonVertices[1]['x'] - polygonVertices[2]['x']);
+    var parallH = Math.sqrt(sideAB + sideBC);
+    var parallA = base * paralH;
+    var centerX = ((polygonVertices[0]['x']+polygonVertices[1]['x']+polygonVertices[2]['x']+polygonVertices[3]['x'])/ 4);
+    var centerY = ((polygonVertices[0]['y']+polygonVertices[1]['y']+polygonVertices[2]['y']+polygonVertices[3]['y'])/ 4);
+    var circleR = Math.sqrt(parallA/Math.PI);
+
+
+    ctx.strokeStyle = '#FFC52C';
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, circleR, 0, Math.PI*2, false);   
+    ctx.stroke();
+    ctx.closePath(); 
+*/
 
 
 
