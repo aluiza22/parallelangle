@@ -1,0 +1,18 @@
+* {padding:0; margin:0;}
+html {background:#dedede; font-family: sans-serif;}
+
+#panel {position:absolute; right:10px; font-size:10px; font-weight:bold;padding:10px 0; width:50%;text-align:right;}
+.btn {padding:10px; border-radius:5px; display:inline-block; opacity:.6;  cursor:pointer; margin: 0 0 0 5px;}
+.btn:hover {opacity:1;}
+#reset {background:#6b6b6b; }
+#about {background:#b5b5b5; }
+#info {background:#b5b5b5;position: absolute;margin-top:-5px; padding:15px;text-align:center;width:120%;right:0;}
+#info.hide {display:none;}
+#details {background:#6b6b6b; opacity:.6; position:absolute; bottom:0px; left:10px;}
+#details p {padding: 10px;}
+
+/*
+.point {background:#97080E;width:0;height:0;padding:5.5px;border-radius:100%;}
+.triangle {border:#25857D;}
+.circle {border:#FFC52C;}
+*/
