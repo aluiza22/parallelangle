@@ -7,8 +7,9 @@ function changePoint(e) {
 
 function createPoint(e) {
 
-  if (pointCount < 3) {    
-    pointCount++;
+  pointCount++;
+
+  if (pointCount <= 3) {  
     polygonVertices.push({x: e.offsetX, y: e.offsetY});
     var item = document.createElement("P");
     var itemText = document.createTextNode('Point '+pointCount+' [X: '+e.offsetX+' Y: '+e.offsetY+']');
@@ -26,6 +27,7 @@ function createPoint(e) {
     ctx.closePath(); 
     
   }  
+
   if  (pointCount === 3) {
     drawShapes();     
   }
@@ -82,13 +84,14 @@ function drawShapes() {
 		ctx.strokeStyle = '#25857D';
 		ctx.lineJoins = 'round';
 		ctx.lineCap = 'round';
-		ctx.lineWidth = 5.5;  
+		ctx.lineWidth = 2;  
   
     ctx.beginPath();
     ctx.moveTo(polygonVertices[0]['x'], polygonVertices[0]['y']);
     ctx.lineTo(polygonVertices[1]['x'], polygonVertices[1]['y']);
     ctx.lineTo(polygonVertices[2]['x'], polygonVertices[2]['y']);
     ctx.lineTo(polygonVertices[3]['x'], polygonVertices[3]['y']);
+    ctx.lineTo(polygonVertices[0]['x'], polygonVertices[0]['y']);
     ctx.stroke();
 
 
