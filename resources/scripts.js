@@ -52,6 +52,7 @@ function createPoint(e) {
 
 }
 
+//This makes the parallelogram, circle and printed information update accordingly.
 function updatePoints() {
 
   console.log('entrou updatePoints');
@@ -172,6 +173,7 @@ function printDetails(detail) {
 }
 
 //based on https://simonsarris.com/making-html5-canvas-useful/
+//The user should be free to move the points around the screen at any time. 
 function handleMousedown(e) {
   clickedPoint = undefined;
   if (hasTriangle) {
@@ -211,8 +213,3 @@ function stopMove() {
     updating = false;
   }
 }
-
-
-
-
-
