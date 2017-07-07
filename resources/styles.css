@@ -1,14 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
 * {padding:0; margin:0;}
-html {background:#dedede; font-family: sans-serif;}
+html {background:#dedede; color: #2d2d2d; font-family: 'Ubuntu', sans-serif; font-size: 14px;}
 
 #panel {position:absolute; right:10px; font-size:10px; font-weight:bold;padding:10px 0; width:50%;text-align:right;}
 .btn {padding:10px; border-radius:5px; display:inline-block; opacity:.6;  cursor:pointer; margin: 0 0 0 5px;}
 .btn:hover {opacity:1;}
-#reset {background:#6b6b6b; }
+#reset {background:#808080; }
 #about {background:#b5b5b5; }
 #info {background:#b5b5b5;position: absolute;margin-top:-5px; padding:15px;text-align:center;width:120%;right:0;}
 #info.hide {display:none;}
-#details {background:#6b6b6b; opacity:.6; position:absolute; bottom:0px; left:10px;}
+#info a {color:#87244c; text-decoration: none;}
+h1 {color:#87244c; font-size: 1em;}
+#details {background:#808080; opacity:.6; position:absolute; bottom:0px; left:10px;}
 #details p {padding: 10px;}
 
 /*
