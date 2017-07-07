@@ -5,10 +5,11 @@ var hasTriangle = false;
 var pointCount = 0;  
 var polygonVertices = [];  
 var canvas = document.getElementById('canvas');
+var updateInterval = undefined;
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 canvas.addEventListener('click', createPoint);
-canvas.addEventListener('mousedown', handleClick);
+canvas.addEventListener('mousedown', handleMousedown);
 canvas.addEventListener('mousemove', changingPoint);
 canvas.addEventListener('mouseup', stopMove);
 canvas.addEventListener('selectstart', function(e) { e.preventDefault(); return false; }, false);
@@ -50,8 +51,11 @@ function createPoint(e) {
 
 function updatePoints() {
 
+  console.log('entrou updatePoints');
+  console.log(polygonVertices);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  reinit();
+  document.getElementById("details").innerHTML = "";
+  polygonVertices.splice(-1,1);
 
   polygonVertices.forEach(function(point, i) {
     ctx.shadowColor = "#494949";
@@ -63,9 +67,7 @@ function updatePoints() {
     ctx.arc(point['x'], point['y'], 5.5, 0, Math.PI*2, false);   
     ctx.fill();
     ctx.closePath();
-
     printDetails('Point '+i+' [X: '+point['x']+' Y: '+point['y']+']');
-
   });
   drawShapes();
 
@@ -140,21 +142,18 @@ function drawShapes() {
 
 }
 
-function resetShape() {
+function resetCanvas() {
 
   //There should be feature that clears the board and allows the user to select three new points, repeating the process
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   pointCount = 0;  
   polygonVertices = [];
+  updating = false;
+  hasTriangle = false;  
+  clickedPoint = undefined;  
+  document.getElementById("details").innerHTML = "";
   reinit();
 
-}
-
-function reinit() {
-  updating = false;
-  clickedPoint = undefined;
-  hasTriangle = false;  
-  document.getElementById("details").innerHTML = "";
 }
 
 function showAbout() {
@@ -174,18 +173,22 @@ function printDetails(detail) {
 
 }
 
-function handleClick(e) {
+function handleMousedown(e) {
+  clickedPoint = undefined;
   if (hasTriangle) {
     polygonVertices.forEach(function(point,i){
-      if (point['x'] == e.offsetX && point['y'] == e.offsetY) {
+      var limitL = point['x'] - 5.5;
+      var limitR = point['x'] + 5.5;
+      var limitT = point['y'] - 5.5;
+      var limitB = point['y'] + 5.5;
+      if ((e.offsetX >= limitL && e.offsetX <= limitR) && (e.offsetY >= limitT && e.offsetY <= limitB)) {
         clickedPoint = i;
       }
     });
     
-    if (clickedPoint !== undefined) {      
-      console.log('Entrou clickedPoint = '+clickedPoint);
+    if (clickedPoint != undefined) {      
       updating = true;
-      updateInterval = setInterval(function() { updatePoints(); },10000);
+      updateInterval = setInterval(function() { updatePoints(); }, 60);
     }
   }
 }
@@ -193,7 +196,9 @@ function handleClick(e) {
 function changingPoint(e) {
   if (hasTriangle) {
     if (updating) {
-      console.log(clickedPoint);
+      console.log('entrou changingPoint');
+      console.log(polygonVertices[clickedPoint]['x']+'/'+polygonVertices[clickedPoint]['y']);
+      console.log(e.offsetX+'/'+e.offsetY);
       polygonVertices[clickedPoint]['x'] = e.offsetX;
       polygonVertices[clickedPoint]['y'] = e.offsetY;
     }
@@ -202,7 +207,8 @@ function changingPoint(e) {
 
 function stopMove() {
   if (hasTriangle && updating) {    
-    window.clearInterval(updateInterval);
+    console.log('entrou stopMove');
+    clearInterval(updateInterval);
     updating = false;
   }
 }
