@@ -55,8 +55,6 @@ function createPoint(e) {
 //This makes the parallelogram, circle and printed information update accordingly.
 function updatePoints() {
 
-  console.log('entrou updatePoints');
-  console.log(polygonVertices);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   document.getElementById("details").innerHTML = "";
   polygonVertices.splice(-1,1);
@@ -197,18 +195,27 @@ function handleMousedown(e) {
 function changingPoint(e) {
   if (hasTriangle) {
     if (updating) {
-      console.log('entrou changingPoint');
-      console.log(polygonVertices[clickedPoint]['x']+'/'+polygonVertices[clickedPoint]['y']);
-      console.log(e.offsetX+'/'+e.offsetY);
-      polygonVertices[clickedPoint]['x'] = e.offsetX;
-      polygonVertices[clickedPoint]['y'] = e.offsetY;
+      var overPoint = false;
+      polygonVertices.forEach(function(item) {
+        var limitL = item['x'] - 11;
+        var limitR = item['x'] + 11;
+        var limitT = item['y'] - 11;
+        var limitB = item['y'] + 11;
+        if ((e.offsetX >= limitL && e.offsetX <= limitR) && (e.offsetY >= limitT && e.offsetY <= limitB)) {
+          overPoint = true;
+        }
+      });
+      
+      if (!overPoint) {
+        polygonVertices[clickedPoint]['x'] = e.offsetX;
+        polygonVertices[clickedPoint]['y'] = e.offsetY;
+      }      
     }
   }
 }
 
 function stopMove() {
   if (hasTriangle && updating) {    
-    console.log('entrou stopMove');
     clearInterval(updateInterval);
     updating = false;
   }
