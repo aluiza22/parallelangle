@@ -12,7 +12,7 @@ html {background:#dedede; color: #2d2d2d; font-family: 'Ubuntu', sans-serif; fon
 #info.hide {display:none;}
 #info a {color:#87244c; text-decoration: none;}
 h1 {color:#87244c; font-size: 1em;}
-#details {background:#808080; opacity:.6; position:absolute; bottom:0px; left:10px;}
+#details {background:#808080; opacity:.6; position:absolute; bottom:10px; left:10px;}
 #details p {padding: 10px;}
 
 /*

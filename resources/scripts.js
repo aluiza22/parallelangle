@@ -24,6 +24,9 @@ function createPoint(e) {
   if (pointCount <= 3) {  
   
     polygonVertices.push({x: e.offsetX, y: e.offsetY});
+    polygonVertices.sort(function (a, b) {
+      return a.x - b.x;
+    });
 
     //The coordinates of the selected points should be presented numerically to the user
     printDetails('Point '+pointCount+' [X: '+e.offsetX+' Y: '+e.offsetY+']');
@@ -74,10 +77,6 @@ function updatePoints() {
 }
 
 function drawShapes() {
-
-    polygonVertices.sort(function (a, b) {
-      return a.x - b.x;
-    });
 
     // based on https://patch.com/new-jersey/wyckoff/find-remaining-vertex-of-a-parallelogram-given-the-other-3-geometry
     // finds the fourth point of the parallelogram based on the three selected points
@@ -152,7 +151,6 @@ function resetCanvas() {
   hasTriangle = false;  
   clickedPoint = undefined;  
   document.getElementById("details").innerHTML = "";
-  reinit();
 
 }
 
@@ -173,6 +171,7 @@ function printDetails(detail) {
 
 }
 
+//based on https://simonsarris.com/making-html5-canvas-useful/
 function handleMousedown(e) {
   clickedPoint = undefined;
   if (hasTriangle) {
